@@ -8,13 +8,7 @@ module.exports = function (grunt) {
 
       testSimple : {
         options : {
-          data : grunt.file.readJSON('test/simple/data/data.json'),
-          setUp : function (env) {
-            env.addFilter('crop', function (str, count) {
-              return str.slice(0, count || 5);
-            });
-            return env;
-          }
+          data : grunt.file.readJSON('test/simple/data/data.json')
         },
         files : [
           {
