@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         }
 
         var renderedFile = njEnv.getTemplate(relativeFile).render(data);
-        var destFile = path.join(sources.dest, relativePath, filename + destExt);
+        var destFile = (path.extname(sources.dest) !== '') ? sources.dest : path.join(sources.dest, relativePath, filename + destExt);
 
         grunt.file.write(destFile, renderedFile);
 

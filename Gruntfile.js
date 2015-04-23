@@ -18,9 +18,8 @@ module.exports = function (grunt) {
         },
         files : [
           {
-            src : 'test/simple/src/**/*.njs',
-            dest : 'test/simple/dest/',
-            ext : '.html'
+            src : 'test/simple/src/index.njs',
+            dest : 'test/simple/dest/index.html'
           }
         ]
       },
