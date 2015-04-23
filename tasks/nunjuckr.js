@@ -1,3 +1,9 @@
+/**
+ * grunt-nunjuckr
+ *
+ * Copyright (c) 2015 denkwerk GmbH
+ */
+
 var nunjucks = require('nunjucks');
 var path = require('path');
 
