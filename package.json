@@ -1,0 +1,27 @@
+{
+  "name": "grunt-nunjuckr",
+  "version": "0.0.1",
+  "description": "A grunt task rendering nunjucks templates to static html files. Inspired by gulp-nunjucks-html.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gruntplugin",
+    "nunjucks",
+    "jinja2",
+    "html",
+    "render"
+  ],
+  "author": {
+    "name": "Marius Büscher",
+    "email": "marius.buescher@denkwerk.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  },
+  "dependencies": {
+    "nunjucks": "^1.3.3"
+  }
+}
