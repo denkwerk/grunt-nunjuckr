@@ -1,3 +1,25 @@
-node_modules/
-test/simple/dest/
-test/extended/dest/
+# Logs
+logs
+*.log
+
+# Temporary files
+.DS_Store
+
+# Node modules
+node_modules
+
+# Sass cache
+.sass-cache
+
+# Grunt intermediate storage
+.grunt
+
+# SCSS lint repot
+scss-lint-report.xml
+
+# PhpStorm/Webstorm IDE files
+.idea
+
+# Test destination storage
+test/simple/dest
+test/extended/dest
