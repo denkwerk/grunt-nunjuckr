@@ -1,6 +1,6 @@
 {
   "name": "grunt-nunjuckr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A grunt task rendering nunjucks templates to static html files.",
   "main": "index.js",
   "repository" : "https://github.com/denkwerk/grunt-nunjuckr.git",
