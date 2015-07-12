@@ -35,13 +35,13 @@ module.exports = function(grunt) {
             var data = options.data;
 
             if (options.preprocessFilePath && typeof options.preprocessFilePath === 'function') {
-                relativeFile = options.preprocessFilePath(file);
+                relativeFile = options.preprocessFilePath.call(this, file);
             } else {
                 relativeFile = path.relative(options.searchPaths || '', file);
             }
 
             if (options.preprocessData && typeof options.preprocessData === 'function') {
-                data = options.preprocessData(data, file);
+                data = options.preprocessData.call(this, data, file);
             }
 
             var renderedFile = njEnv.getTemplate(relativeFile).render(data);
