@@ -1,6 +1,8 @@
 module.exports = function (grunt) {
 
     var path = require('path');
+    var showdown = require('showdown');
+    var mdConverter = new showdown.Converter();
 
     grunt.initConfig({
 
@@ -39,8 +41,7 @@ module.exports = function (grunt) {
                     preprocessData : function (data, file) {
                         var fileExt = path.extname(file);
                         var filename = path.basename(file, fileExt);
-                        var dir = path.dirname(file);
-                        var jsonPath = path.join('test/extended/data/', dir, filename + '.json');
+                        var jsonPath = path.join('test/extended/data/', filename + '.json');
 
                         data = grunt.file.readJSON(jsonPath);
 
@@ -51,6 +52,28 @@ module.exports = function (grunt) {
                     {
                         src : 'test/extended/src/**/*.njs',
                         dest : 'test/extended/dest/'
+                    }
+                ]
+            },
+            testMarkdown : {
+                options : {
+                    ext: '.html',
+                    searchPaths : 'test/markdown/src',
+                    preprocessData : function(data, file) {
+                        var text = grunt.file.read(file);
+                        data = {
+                            content: mdConverter.makeHtml(text)
+                        };
+                        return data;
+                    },
+                    preprocessFilePath : function (fileName) {
+                        return 'template.njs';
+                    }
+                },
+                files : [
+                    {
+                        src : 'test/markdown/content/**/*.md',
+                        dest : 'test/markdown/dest/'
                     }
                 ]
             }

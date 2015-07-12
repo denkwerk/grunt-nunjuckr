@@ -29,13 +29,19 @@ module.exports = function(grunt) {
 
             var fileExt = path.extname(file);
             var filename = path.basename(file, fileExt);
-            var relativeFile = path.relative(options.searchPaths || '', file);
+            var relativeFile;
             var relativePath = path.dirname(relativeFile);
             var destExt = sources.ext || options.ext || '.html';
             var data = options.data;
 
+            if (options.preprocessFilePath && typeof options.preprocessFilePath === 'function') {
+                relativeFile = options.preprocessFilePath(file);
+            } else {
+                relativeFile = path.relative(options.searchPaths || '', file);
+            }
+
             if (options.preprocessData && typeof options.preprocessData === 'function') {
-                data = options.preprocessData(data, relativeFile);
+                data = options.preprocessData(data, file);
             }
 
             var renderedFile = njEnv.getTemplate(relativeFile).render(data);

@@ -21,5 +21,4 @@ scss-lint-report.xml
 .idea
 
 # Test destination storage
-test/simple/dest
-test/extended/dest
+test/*/dest

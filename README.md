@@ -56,7 +56,13 @@ For more infomation about nunjucks environments see [https://mozilla.github.io/n
 Type: `Function`
 Default: `undefined`
 
-A preprocessor callback for the data coming in. Gets called on every file with the params `data` and `file`
+A preprocessor callback for the data coming in. Gets called on every file with the params `data` and `file`.
+
+__Changes in `v0.1.0`:__ `file` is no longer relative to `searchPath`. It now is the full path to the current file.
+
+### PreprocessFilePath
+
+A callback function for preprocessing the template path. Gets called for every file only with the parameter `file`.
 
 ## Usage Examples
 
@@ -86,7 +92,7 @@ grunt.initConfig({
 
 ### Different data for every template
 
-load different data files for every file in the templates folder.
+Load different data files for every file in the templates folder.
 
 ```javascript
 var path = require('path');
@@ -101,8 +107,7 @@ grunt.initConfig({
         preprocessData : function (data, file) {
           var fileExt = path.extname(file);
           var filename = path.basename(file, fileExt);
-          var dir = path.dirname(file);
-          var jsonPath = path.join('test/extended/data/', dir, filename + '.json');
+          var jsonPath = path.join('test/extended/data/', filename + '.json');
 
           data = grunt.file.readJSON(jsonPath);
 
@@ -143,6 +148,42 @@ grunt.initConfig({
         {
           src : 'test/extended/src/**/*.njs',
           dest : 'test/extended/dest/'
+        }
+      ]
+    }
+  }
+});
+```
+
+### Markdown parsing with default template
+
+This example uses [showdown](https://www.npmjs.com/package/showdown) as a markdown parser. You can preprocess your data as you prefer, e.g. when you are using RST.
+
+```javascript
+var showdown = require('showdown');
+var mdConverter = new showdown.Converter();
+
+grunt.initConfig({
+  nunjuckr : {
+    testMarkdown : {
+      options : {
+        ext: '.html',
+        searchPaths : 'test/markdown/src',
+        preprocessData : function(data, file) {
+          var text = grunt.file.read(file);
+          data = {
+            content: mdConverter.makeHtml(text)
+          };
+          return data;
+        },
+        preprocessFilePath : function (fileName) {
+          return 'template.njs';
+        }
+      },
+      files : [
+        {
+          src : 'test/markdown/content/**/*.md',
+          dest : 'test/markdown/dest/'
         }
       ]
     }
