@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 
     grunt.registerMultiTask('nunjuckr', function () {
 
-        var options = this.data.options
+        var options = this.options();
         var njEnv = new nunjucks.Environment( new nunjucks.FileSystemLoader(options.searchPaths), {
             autoescape : options.autoescape,
             watch : false,
