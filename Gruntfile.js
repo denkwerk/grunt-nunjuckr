@@ -76,6 +76,22 @@ module.exports = function (grunt) {
                         dest : 'test/markdown/dest/'
                     }
                 ]
+            },
+
+            testDimensions : {
+                options : {
+                    data : grunt.file.readJSON('test/simple/data/data.json'),
+                    contentDimensions: {
+                        lang: [ 'de', 'en' ],
+                        tz: [ 'UTC', 'GMT' ]
+                    }
+                },
+                files : [
+                    {
+                        src : 'test/simple/src/index.njs',
+                        dest : 'test/simple/dest/'
+                    }
+                ]
             }
         }
 

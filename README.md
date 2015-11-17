@@ -42,6 +42,15 @@ Default: `undefined`
 
 Configures nunjucks to render with different tags
 
+### ContentDimensions
+
+Type: `Object`
+Default: `undefined`
+
+Makes it possible to generate pages with multiple content dimensions. E.g. language or timezone.
+The current dimensions object is handed over as a third parameter in the [preprocessData](#preprocessdata)
+function as well as the [preprocessFilePath](#preprocessfilepath) function.
+
 ### SetUp
 
 Type: `Function`
