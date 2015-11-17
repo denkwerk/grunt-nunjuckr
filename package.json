@@ -19,6 +19,9 @@
     "email": "marius.buescher@denkwerk.com"
   },
   "license": "MIT",
+  "peerDependencies": {
+    "grunt": "^0.4.5"
+  },
   "devDependencies": {
     "grunt": "0.4.5",
     "showdown": "1.1.0"
