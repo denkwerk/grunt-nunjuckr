@@ -27,6 +27,6 @@
     "showdown": "1.1.0"
   },
   "dependencies": {
-    "nunjucks": "1.3.4"
+    "nunjucks": "2.1.0"
   }
 }
