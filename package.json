@@ -20,13 +20,11 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "nunjucks": "^2.1.0"
   },
   "devDependencies": {
     "grunt": "0.4.5",
     "showdown": "1.1.0"
-  },
-  "dependencies": {
-    "nunjucks": "2.1.0"
   }
 }
