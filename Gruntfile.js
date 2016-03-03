@@ -92,6 +92,26 @@ module.exports = function (grunt) {
                         dest : 'test/simple/dest/'
                     }
                 ]
+            },
+
+            testIterator : {
+                options : {
+                    data : grunt.file.readJSON('test/simple/data/iterator.json'),
+                    iterator: function(callback, options) {
+                        options.data.forEach(function(data) {
+                            callback(data.filename, 'test/simple/dest/', '.html', data);
+                        }, this);
+                    },
+                    preprocessFilePath: function() {
+                        return 'test/simple/src/index.njs';
+                    }
+                },
+                files : [
+                    {
+                        src : 'test/simple/data/iterator.json',
+                        dest : 'test/simple/dest/'
+                    }
+                ]
             }
         }
 

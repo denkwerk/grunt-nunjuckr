@@ -73,6 +73,11 @@ __Changes in `v0.1.0`:__ `file` is no longer relative to `searchPath`. It now is
 
 A callback function for preprocessing the template path. Gets called for every file only with the parameter `file`.
 
+### Iterator
+
+A function that represents the iterator. Here you can do some custom iteration over e.g. `data` to render multiple sites
+from one file.
+
 ## Usage Examples
 
 ### Basic usage

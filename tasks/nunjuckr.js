@@ -24,16 +24,27 @@ module.exports = function(grunt) {
         }
 
         var renderFiles = ( function( contentDimensions ) {
-            this.files.forEach(function ( sources ) {
+            var fileIterator = function(callback) {
+                this.files.forEach(function( sources ) {
+                    sources.src.forEach(function(file) {
 
-                sources.src.forEach(function ( file ) {
+                        var ext = sources.ext || options.ext || '.html';
+                        var data = options.data;
+
+                        var dest = sources.dest;
+
+                        callback( file, dest, ext, data );
+
+                    }, this);
+                }, this);
+            }.bind(this);
+
+            var callback = function( file, dest, destExt, data ) {
 
                 var fileExt = path.extname(file);
                 var filename = path.basename(file, fileExt);
                 var relativeFile;
                 var relativePath = path.dirname(relativeFile);
-                var destExt = sources.ext || options.ext || '.html';
-                var data = options.data;
 
                 if (options.preprocessFilePath && typeof options.preprocessFilePath === 'function') {
                     relativeFile = options.preprocessFilePath.call(this, file, contentDimensions);
@@ -57,17 +68,21 @@ module.exports = function(grunt) {
 
                     var dimensionsPath = pathSegments.join( path.sep );
 
-                    destFile = path.join( sources.dest, dimensionsPath, relativePath, filename + destExt );
+                    destFile = path.join( dest, dimensionsPath, relativePath, filename + destExt );
 
                 } else {
-                    destFile = (path.extname(sources.dest) !== '') ? sources.dest : path.join(sources.dest, relativePath, filename + destExt);
+                    destFile = (path.extname(dest) !== '') ? dest : path.join(dest, relativePath, filename + destExt);
                 }
 
                 grunt.file.write(destFile, renderedFile);
 
-                }, this);
+            }.bind(this);
 
-            }, this);
+            if (typeof options.iterator === 'function') {
+                options.iterator.call(this, callback, options);
+            } else {
+                fileIterator(callback);
+            }
         } ).bind( this );
 
         if ( !options.contentDimensions ) {
