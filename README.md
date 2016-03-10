@@ -42,6 +42,41 @@ Default: `undefined`
 
 Configures nunjucks to render with different tags
 
+### Globals
+
+Type: `Object` or `Array`
+Default: `undefined`
+
+Gives you the ability to specify globals within your config. There are two ways to do that: By
+using an object or by using an array.
+
+This example uses an object:
+
+```javascript
+{
+  options: {
+    globals: {
+      globalName: 'Global Value'
+    }
+  }
+}
+```
+
+This example uses an array:
+
+```javascript
+{
+  options: {
+    globals: [
+      {
+        name: 'globalName',
+        value: 'Global Value'
+      }
+    ]
+  }
+}
+```
+
 ### ContentDimensions
 
 Type: `Object`

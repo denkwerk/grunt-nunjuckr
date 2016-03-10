@@ -112,6 +112,21 @@ module.exports = function (grunt) {
                         dest : 'test/simple/dest/'
                     }
                 ]
+            },
+
+            testGlobal: {
+                options : {
+                    data : grunt.file.readJSON('test/globals/data/data.json'),
+                    globals: {
+                        globalTitle: 'This is a global title'
+                    }
+                },
+                files : [
+                    {
+                        src : 'test/globals/src/index.njs',
+                        dest : 'test/globals/dest/index.html'
+                    }
+                ]
             }
         }
 

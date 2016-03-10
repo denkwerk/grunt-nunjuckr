@@ -23,6 +23,19 @@ module.exports = function(grunt) {
             njEnv = options.setUp.call(this, njEnv);
         }
 
+        if (typeof options.globals === 'object') {
+            for (var globalName in options.globals) {
+                var globalVal = options.globals[globalName];
+                njEnv.addGlobal(globalName, globalVal);
+            }
+        } else if (typeof options.globals === 'array') {
+            options.globals.forEach(function(globalObj) {
+                if (typeof globalObj === 'object') {
+                    njEnv.addGlobal(globalObj.name, globalObj.value);
+                }
+            });
+        }
+
         var renderFiles = ( function( contentDimensions ) {
             var fileIterator = function(callback) {
                 this.files.forEach(function( sources ) {
