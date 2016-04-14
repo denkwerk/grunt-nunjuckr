@@ -13,7 +13,18 @@ module.exports = function(grunt) {
     grunt.registerMultiTask('nunjuckr', function () {
 
         var options = this.options();
-        var njEnv = new nunjucks.Environment( new nunjucks.FileSystemLoader(options.searchPaths), {
+
+		var loader = options.loader;
+
+		if (typeof loader === 'undefined') {
+			loader = [];
+		} else if (!Array.isArray(loader)) {
+			loader = [loader];
+		}
+
+		loader.push(new nunjucks.FileSystemLoader(options.searchPaths));
+
+        var njEnv = new nunjucks.Environment( loader, {
             autoescape : options.autoescape,
             watch : false,
             tags : options.tags

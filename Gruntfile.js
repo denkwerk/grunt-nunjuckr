@@ -4,6 +4,21 @@ module.exports = function (grunt) {
     var showdown = require('showdown');
     var mdConverter = new showdown.Converter();
 
+	var nunjucks = require('nunjucks');
+	var CustomLoader = nunjucks.Loader.extend({
+		getSource: function(name) {
+			if (name === 'custom') {
+				return {
+					src: 'Custom loader',
+					path: name,
+					noCache: false
+				};
+			}
+
+			return false;
+		}
+	});
+
     grunt.initConfig({
 
         nunjuckr : {
@@ -127,7 +142,20 @@ module.exports = function (grunt) {
                         dest : 'test/globals/dest/index.html'
                     }
                 ]
-            }
+            },
+
+			testLoader: {
+				options : {
+					data: {},
+					loader: new CustomLoader()
+				},
+				files : [
+					{
+						src : 'test/loader/src/index.njs',
+						dest : 'test/loader/dest/index.html'
+					}
+				]
+			}
         }
 
     });
