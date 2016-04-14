@@ -113,6 +113,12 @@ A callback function for preprocessing the template path. Gets called for every f
 A function that represents the iterator. Here you can do some custom iteration over e.g. `data` to render multiple sites
 from one file.
 
+### Loader
+
+An array or instance of a [nunjucks custom loader](https://mozilla.github.io/nunjucks/api.html#writing-a-loader).
+
+Here you can specify your own loader(s) to implement special feature.
+
 ## Usage Examples
 
 ### Basic usage
@@ -238,4 +244,42 @@ grunt.initConfig({
     }
   }
 });
+```
+
+### Custom Loader
+
+This example is a simple one for a custom loader. For more information about custom loaders in nunjucks please read [the manual](https://mozilla.github.io/nunjucks/api.html#writing-a-loader).
+
+```javascript
+var nunjucks = require('nunjucks');
+var CustomLoader = nunjucks.Loader.extend({
+    getSource: function(name) {
+        if (name === 'custom') {
+            return {
+                src: 'Custom loader',
+                path: name,
+                noCache: false
+            };
+        }
+
+        return false;
+    }
+});
+
+grunt.initConfig({
+    nunjuckr: {
+        testLoader: {
+            options : {
+                data: {},
+                loader: new CustomLoader()
+            },
+            files : [
+                {
+                    src : 'test/loader/src/index.njs',
+                    dest : 'test/loader/dest/index.html'
+                }
+            ]
+        }
+    }
+})
 ```
