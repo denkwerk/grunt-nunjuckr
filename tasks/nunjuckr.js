@@ -68,13 +68,14 @@ module.exports = function(grunt) {
                 var fileExt = path.extname(file);
                 var filename = path.basename(file, fileExt);
                 var relativeFile;
-                var relativePath = path.dirname(relativeFile);
 
                 if (options.preprocessFilePath && typeof options.preprocessFilePath === 'function') {
                     relativeFile = options.preprocessFilePath.call(this, file, contentDimensions);
                 } else {
                     relativeFile = path.relative(options.searchPaths || '', file);
                 }
+
+                var relativePath = path.dirname(relativeFile);
 
                 if (options.preprocessData && typeof options.preprocessData === 'function') {
                     data = options.preprocessData.call(this, data, file, contentDimensions);

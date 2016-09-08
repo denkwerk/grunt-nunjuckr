@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "grunt": ">=0.4.0",
+    "nunjucks": "^2.5.0",
     "showdown": "1.1.0"
   }
 }
